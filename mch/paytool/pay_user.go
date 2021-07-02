@@ -40,7 +40,7 @@ func (c *PayTool) Pay(input PayInput) (isSuccess bool, err error) {
 	signMap["desc"] = input.Remark
 	signMap["sign"] = base.Sign(signMap, c.MchAPIKey, nil)
 
-	respMap, err := c.SendRedPackRaw(signMap)
+	respMap, err := c.PayRaw(signMap)
 	if err != nil {
 		return false, err
 	}
