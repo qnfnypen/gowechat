@@ -64,16 +64,6 @@ func (c *PayTool) Pay(input PayInput) (isSuccess bool, err error) {
 		return false, err
 	}
 
-	mchBillNo, ok := respMap["mch_billno"]
-	if !ok {
-		err = errors.New("no mch_billno")
-		return false, err
-	}
-
-	if billno != mchBillNo {
-		err = errors.New("billno is not correct")
-		return false, err
-	}
 
 	return true, nil
 }
