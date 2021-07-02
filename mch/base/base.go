@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/yaotian/gowechat/wxcontext"
+	"github.com/qnfnypen/gowechat/wxcontext"
 )
 
 //MchBase base mch
@@ -66,7 +66,7 @@ func (c *MchBase) PostXML(url string, req map[string]string, needSSL bool) (resp
 	}
 
 	// 安全考虑, 做下验证
-	mchId, ok := resp["mch_id"]
+	mchId, ok := resp["mchid"]
 	if ok && mchId != c.MchID {
 		err = fmt.Errorf("mch_id mismatch, have: %q, want: %q", mchId, c.MchID)
 		return
@@ -74,7 +74,7 @@ func (c *MchBase) PostXML(url string, req map[string]string, needSSL bool) (resp
 
 	//发送红包的情况，不需要验证这些，因为有的信息没有
 	if !needSSL {
-		appId, ok := resp["appid"]
+		appId, ok := resp["mch_appid"]
 		if ok && appId != c.AppID {
 			err = fmt.Errorf("appid mismatch, have: %q, want: %q", appId, c.AppID)
 			return

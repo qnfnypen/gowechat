@@ -1,8 +1,8 @@
 package paytool
 
 import (
-	"github.com/yaotian/gowechat/mch/base"
-	"github.com/yaotian/gowechat/wxcontext"
+	"github.com/qnfnypen/gowechat/mch/base"
+	"github.com/qnfnypen/gowechat/wxcontext"
 )
 
 //PayTool pay tool
@@ -20,4 +20,9 @@ func NewPayTool(context *wxcontext.Context) *PayTool {
 //SendRedPackRaw 发现金红包
 func (c *PayTool) SendRedPackRaw(req map[string]string) (resp map[string]string, err error) {
 	return c.PostXML("https://api.mch.weixin.qq.com/mmpaymkttransfers/sendredpack", req, true)
+}
+
+//PayRaw 付款
+func (c *PayTool) PayRaw(req map[string]string) (resp map[string]string, err error) {
+	return c.PostXML("https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers", req, true)
 }

@@ -3,9 +3,9 @@ package menu
 import (
 	"encoding/json"
 
-	"github.com/yaotian/gowechat/mp/base"
-	"github.com/yaotian/gowechat/util"
-	"github.com/yaotian/gowechat/wxcontext"
+	"github.com/qnfnypen/gowechat/mp/base"
+	"github.com/qnfnypen/gowechat/util"
+	"github.com/qnfnypen/gowechat/wxcontext"
 )
 
 const (
