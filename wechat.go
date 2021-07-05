@@ -68,9 +68,9 @@ func (wc *Wechat) checkCfgBase() (err error) {
 	if wc.Context.AppSecret == "" {
 		return fmt.Errorf("%s", "配置中没有AppSecret")
 	}
-	if wc.Context.Token == "" {
-		return fmt.Errorf("%s", "配置中没有Token")
-	}
+	// if wc.Context.Token == "" {
+	// 	return fmt.Errorf("%s", "配置中没有Token")
+	// }
 	return
 }
 
