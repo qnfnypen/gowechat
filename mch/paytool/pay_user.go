@@ -22,7 +22,7 @@ type PayInput struct {
 }
 
 //Pay 付款
-func (c *PayTool) Pay(input PayInput) (orderID string, isSuccess bool, err error) {
+func (c *PayTool) Pay(input PayInput) (string, bool, error) {
 	now := time.Now()
 	dayStr := beego.Date(now, "Ymd")
 
