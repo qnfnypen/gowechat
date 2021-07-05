@@ -22,7 +22,7 @@ type PayInput struct {
 }
 
 //Pay 付款
-func (c *PayTool) Pay(input PayInput) (isSuccess bool, err error) {
+func (c *PayTool) Pay(input PayInput) (orderID string, isSuccess bool, err error) {
 	now := time.Now()
 	dayStr := beego.Date(now, "Ymd")
 
@@ -42,13 +42,13 @@ func (c *PayTool) Pay(input PayInput) (isSuccess bool, err error) {
 
 	respMap, err := c.PayRaw(signMap)
 	if err != nil {
-		return false, err
+		return "", false, err
 	}
 
 	resultCode, ok := respMap["result_code"]
 	if !ok {
 		err = errors.New("no result_code")
-		return false, err
+		return "", false, err
 	}
 
 	if resultCode != "SUCCESS" {
@@ -57,13 +57,12 @@ func (c *PayTool) Pay(input PayInput) (isSuccess bool, err error) {
 		errCode, _ := respMap["err_code"]
 
 		if errCode == "NOTENOUGH" {
-			return false, ErrNoEnoughMoney
+			return "", false, ErrNoEnoughMoney
 		}
 
 		err = fmt.Errorf("Err:%s return_msg:%s err_code:%s err_code_des:%s", "result code is not success", returnMsg, errCode, errMsg)
-		return false, err
+		return "", false, err
 	}
 
-
-	return true, nil
+	return billno, true, nil
 }
